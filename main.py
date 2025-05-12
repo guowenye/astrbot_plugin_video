@@ -9,7 +9,7 @@ import os
 class DwoVideoPlugin(Star):
     def __init__(self, context: Context):
         super().__init__(context)
-        self.api_url = "https://api.dwo.cc/api/video"
+        self.api_url = "https://v2.xxapi.cn/api/meinv"
         self.session = aiohttp.ClientSession()
     async def terminate(self):
         await self.session.close()
