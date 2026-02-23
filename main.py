@@ -28,6 +28,10 @@ class DwoVideoPlugin(Star):
     @filter.command("video", alias={"小视频", "短视频"})
     async def get_dwo_video(self, event: AstrMessageEvent, *args, **kwargs):
         try:
+
+            logger.info("收到指令：获取视频")
+            logger.info("參數内容：", args, kwargs)
+
             params = {"v": "xd"}
             headers = {
             "Authorization": f"Bearer {self.config.get('api_key', '')}"  # 這裡填你的 token
