@@ -47,10 +47,11 @@ class DwoVideoPlugin(Star):
                 else:
                     context = await response.read()  # 讀取原始 bytes
 
-                
-                video_url = str(context.data.get("url", ""))
 
-                logger.info(f"視頻網址：{video_url}")
+                logger.info(f"視頻信息：{context}")
+                
+                video_url = str(context)
+
                 video_component = Video.fromURL(video_url)
                 logger.info(f"視頻組件：{video_component}")
 
