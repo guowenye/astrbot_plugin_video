@@ -57,14 +57,18 @@ class DwoVideoPlugin(Star):
                 logger.info(f"視頻組件：{video_component}")
 
                 message_chain = [
+                    Plain("\u200b") ,
                     Plain("视频获取成功！\n") ,
-                    video_component
+                    video_component,
+                    video_url,
+                    Plain("\u200b") 
                 ]
 
                 if self.config.get("debug_mode", False):
+                    message_chain.append(Plain(f"\u200b"))
                     message_chain.append(Plain(f"\n响应内容类型：{content_type}"))
                     message_chain.append(Plain(f"API 响应内容：{context}"))
-                  
+                    message_chain.append(Plain(f"\u200b"))
 
                 yield event.chain_result(message_chain)
         
