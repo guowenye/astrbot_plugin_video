@@ -60,7 +60,7 @@ class DwoVideoPlugin(Star):
                     Plain("视频获取成功！") ,
                     video_component,
                     Plain(f"\u200b\n视频链接：\u200b"),
-                    Plain(video_url)
+                    Plain(f"{video_url}")
                    
                 ]
 
