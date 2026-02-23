@@ -5,18 +5,32 @@ import aiohttp
 import tempfile
 import os
 
+from astrbot.api import AstrBotConfig
+
+@register("config", "Soulter", "一个配置示例", "1.0.0")
+class ConfigPlugin(Star):
+    def __init__(self, context: Context, config: AstrBotConfig): # AstrBotConfig 继承自 Dict，拥有字典的所有方法
+        super().__init__(context)
+        self.config = config
+        print("測試config",self.config)
+
+        # 支持直接保存配置
+        self.config.save_config() # 保存配置
+
 @register("video_plugin", "YourName", "astrbot_plugin_video", "1.0.0", "https://github.com/guowenye/astrbot_plugin_video")
 class DwoVideoPlugin(Star):
     def __init__(self, context: Context):
         super().__init__(context)
         self.api_url = "https://v2.xxapi.cn/api/meinv"
         self.session = aiohttp.ClientSession()
+
+
     async def terminate(self):
         await self.session.close()
     @filter.command("video", alias={"小视频", "短视频"})
     async def get_dwo_video(self, event: AstrMessageEvent):
         try:
-            params = {"v": "xd"}
+            params = {"v": "xd","key":self.config.get("api_key", "")}  # 从配置中获取API密钥
             async with self.session.get(self.api_url, params=params) as response:
                 if response.status != 200:
                     yield event.plain_result(f"请求失败：状态码{response.status}")

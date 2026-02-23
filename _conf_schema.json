@@ -1,5 +1,5 @@
 {
-  "token": {
+  "api_key": {
     "description": "API Token",
     "type": "string",
     "hint": "小小API Key",
