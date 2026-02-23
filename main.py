@@ -51,7 +51,7 @@ class DwoVideoPlugin(Star):
                 logger.info(f"API 响应内容类型：{content_type}")
                 logger.info(f"視頻信息：{context}")
                 
-                video_url = str(context.data)
+                video_url = str(context.get("data", ""))
 
                 video_component = Video.fromURL(video_url)
                 logger.info(f"視頻組件：{video_component}")
