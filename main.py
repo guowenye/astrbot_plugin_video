@@ -59,7 +59,7 @@ class DwoVideoPlugin(Star):
                 message_chain = [
                     Plain("视频获取成功！") ,
                     video_component,
-                    Plain(f"视频链接：{video_url}")
+                    Plain(f"\u200b\n视频链接：{video_url}\u200b")
                    
                 ]
 
