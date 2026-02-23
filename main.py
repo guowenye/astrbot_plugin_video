@@ -26,7 +26,7 @@ class DwoVideoPlugin(Star):
     async def terminate(self):
         await self.session.close()
     @filter.command("video", alias={"小视频", "短视频"})
-    async def get_dwo_video(self, event: AstrMessageEvent):
+    async def get_dwo_video(self, event: AstrMessageEvent, *args, **kwargs):
         try:
 
           
