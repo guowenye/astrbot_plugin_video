@@ -7,20 +7,18 @@ import os
 
 from astrbot.api import AstrBotConfig
 
-@register("config", "astrbot_plugin_video", "一个配置示例", "1.2.0")
-class ConfigPlugin(Star):
-    def __init__(self, context: Context, config: AstrBotConfig): # AstrBotConfig 继承自 Dict，拥有字典的所有方法
+@register("video_plugin", "YourName", "astrbot_plugin_video", "1.0.0", "https://github.com/guowenye/astrbot_plugin_video")
+class DwoVideoPlugin(Star):
+    def __init__(self, context: Context, config: AstrBotConfig):
         super().__init__(context)
         self.config = config
+
         print("測試config",self.config)
 
         # 支持直接保存配置
         self.config.save_config() # 保存配置
 
-@register("video_plugin", "YourName", "astrbot_plugin_video", "1.0.0", "https://github.com/guowenye/astrbot_plugin_video")
-class DwoVideoPlugin(Star):
-    def __init__(self, context: Context):
-        super().__init__(context)
+
         self.api_url = "https://v2.xxapi.cn/api/meinv"
         self.session = aiohttp.ClientSession()
 
