@@ -7,7 +7,7 @@ import os
 
 from astrbot.api import AstrBotConfig
 
-@register("config", "Soulter", "一个配置示例", "1.0.0")
+@register("config", "astrbot_plugin_video", "一个配置示例", "1.2.0")
 class ConfigPlugin(Star):
     def __init__(self, context: Context, config: AstrBotConfig): # AstrBotConfig 继承自 Dict，拥有字典的所有方法
         super().__init__(context)
