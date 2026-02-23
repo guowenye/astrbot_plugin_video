@@ -23,10 +23,12 @@ class DwoVideoPlugin(Star):
                     return
                 content_type = response.headers.get("content-type", "")
                 video_url = str(response.url)
+
+                print(f"視頻網址：{video_url}")
                 video_component = Video.fromURL(video_url)
                 message_chain = [
                     video_component,
-                    Plain("视频获取成功！") 
+                    Plain("视频获取成功！ "+ video_url) 
                 ]
                 yield event.chain_result(message_chain)
         except aiohttp.ClientError as e:
