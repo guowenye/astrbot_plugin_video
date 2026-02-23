@@ -26,12 +26,10 @@ class DwoVideoPlugin(Star):
     async def terminate(self):
         await self.session.close()
     @filter.command("video", alias={"小视频", "短视频"})
-    async def get_dwo_video(self, event: AstrMessageEvent, *args, **kwargs):
+    async def get_dwo_video(self, event: AstrMessageEvent):
         try:
 
-            logger.info("收到指令：获取视频")
-            logger.info("參數内容：", args, kwargs)
-
+          
             params = {"v": "xd"}
             headers = {
             "Authorization": f"Bearer {self.config.get('api_key', '')}"  # 這裡填你的 token
@@ -61,19 +59,19 @@ class DwoVideoPlugin(Star):
                 logger.info(f"視頻組件：{video_component}")
 
                 message_chain = [
-                    Plain("视频获取成功！"),
-                    video_component,
-                    Plain(f"视频链接：{video_url}") 
+                    Plain(f"\u200b视频获取成功！\n视频链接：{video_url}\u200b"),
+                    video_component
+                   
                 ]
 
                 yield event.chain_result(message_chain)
         
                 if self.config.get("debug_mode", False):
-                    message_chain = [
+                    message_debug_chain = [
                         Plain(f"\u200b\n响应内容类型：{content_type}"),
                         Plain(f"\nAPI 响应内容：{context}\u200b")
                     ]
-                    yield event.chain_result(message_chain)
+                    yield event.chain_result(message_debug_chain)
         
         except aiohttp.ClientError as e:
             yield event.plain_result(f"网络请求出错：{str(e)}")
