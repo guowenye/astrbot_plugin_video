@@ -56,8 +56,7 @@ class DwoVideoPlugin(Star):
                 logger.info(f"視頻組件：{video_component}")
 
                 message_chain = [
-                    video_component,
-                    Plain("视频获取成功！") ,
+                    Plain("视频获取成功！") 
                 ]
 
                 if self.config.get("debug_mode", False):
