@@ -57,10 +57,9 @@ class DwoVideoPlugin(Star):
                 logger.info(f"視頻組件：{video_component}")
 
                 message_chain = [
-                    Plain("视频获取成功！") ,
+                    Plain("视频获取成功！"),
                     video_component,
-                    Plain(f"视频链接：{video_url}")
-                   
+                    Plain(f"视频链接：{video_url}") 
                 ]
 
                 yield event.chain_result(message_chain)
