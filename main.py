@@ -38,13 +38,21 @@ class DwoVideoPlugin(Star):
                     yield event.plain_result(f"请求失败：状态码{response.status}")
                     return
                 content_type = response.headers.get("content-type", "")
-                context = response.content
-                video_url = str(response.url)
+                
+                # 根據 Content-Type 判斷如何讀取
+                if "application/json" in content_type:
+                    context = await response.json()  # 讀取 JSON
+                elif "text/" in content_type:
+                    context = await response.text()  # 讀取文字
+                else:
+                    context = await response.read()  # 讀取原始 bytes
 
+                
+                video_url = str(response.url)
                 logger.info(f"視頻網址：{video_url}")
                 video_component = Video.fromURL(video_url)
-
                 logger.info(f"視頻組件：{video_component}")
+
                 message_chain = [
                     video_component,
                     Plain("视频获取成功！") ,
@@ -53,6 +61,7 @@ class DwoVideoPlugin(Star):
                 ]
 
                 yield event.chain_result(message_chain)
+        
         except aiohttp.ClientError as e:
             yield event.plain_result(f"网络请求出错：{str(e)}")
         except Exception as e:
