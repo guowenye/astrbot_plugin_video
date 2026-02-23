@@ -7,7 +7,7 @@
   },
    "debug_mode": {
     "description": "Debug Mode",
-    "type": "boolean",
+    "type": "bool",
     "hint": "是否开启调试模式",
     "obvious_hint": true
   }
