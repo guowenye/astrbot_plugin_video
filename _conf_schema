@@ -1,0 +1,31 @@
+{
+  "token": {
+    "description": "API Token",
+    "type": "string",
+    "hint": "小小API Key",
+    "obvious_hint": true
+  },
+  "sub_config": {
+    "description": "测试嵌套配置",
+    "type": "object",
+    "hint": "xxxx",
+    "items": {
+      "name": {
+        "description": "testsub",
+        "type": "string",
+        "hint": "xxxx"
+      },
+      "id": {
+        "description": "testsub",
+        "type": "int",
+        "hint": "xxxx"
+      },
+      "time": {
+        "description": "testsub",
+        "type": "int",
+        "hint": "xxxx",
+        "default": 123
+      }
+    }
+  }
+}
