@@ -5,7 +5,7 @@ import aiohttp
 import tempfile
 import os
 
-from astrbot.api import AstrBotConfig
+from astrbot.api import AstrBotConfig,logger
 
 @register("video_plugin", "YourName", "astrbot_plugin_video", "1.0.0", "https://github.com/guowenye/astrbot_plugin_video")
 class DwoVideoPlugin(Star):
@@ -13,7 +13,7 @@ class DwoVideoPlugin(Star):
         super().__init__(context)
         self.config = config
 
-        print("測試config",self.config)
+        logger.info("測試config",self.config)
 
         # 支持直接保存配置
         self.config.save_config() # 保存配置
@@ -38,14 +38,20 @@ class DwoVideoPlugin(Star):
                     yield event.plain_result(f"请求失败：状态码{response.status}")
                     return
                 content_type = response.headers.get("content-type", "")
+                context = response.content
                 video_url = str(response.url)
 
-                print(f"視頻網址：{video_url}")
+                logger.info(f"視頻網址：{video_url}")
                 video_component = Video.fromURL(video_url)
+
+                logger.info(f"視頻組件：{video_component}")
                 message_chain = [
                     video_component,
-                    Plain("视频获取成功！") 
+                    Plain("视频获取成功！") ,
+                    Plain(f"响应内容类型：{content_type}"),
+                    Plain(f"context:{context}")
                 ]
+
                 yield event.chain_result(message_chain)
         except aiohttp.ClientError as e:
             yield event.plain_result(f"网络请求出错：{str(e)}")
