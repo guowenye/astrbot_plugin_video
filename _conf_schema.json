@@ -8,8 +8,7 @@
    "debug_mode": {
     "description": "Debug Mode",
     "type": "bool",
-    "hint": "是否开启调试模式",
-    "obvious_hint": true
+    "hint": "是否开启调试模式"
   }
   
 }
