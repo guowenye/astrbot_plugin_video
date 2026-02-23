@@ -28,8 +28,12 @@ class DwoVideoPlugin(Star):
     @filter.command("video", alias={"小视频", "短视频"})
     async def get_dwo_video(self, event: AstrMessageEvent):
         try:
-            params = {"v": "xd","key":self.config.get("api_key", "")}  # 从配置中获取API密钥
-            async with self.session.get(self.api_url, params=params) as response:
+            params = {"v": "xd"}
+            headers = {
+            "Authorization": f"Bearer {self.config.get('api_key', '')}"  # 這裡填你的 token
+            }
+
+            async with self.session.get(self.api_url, params=params, headers=headers) as response:
                 if response.status != 200:
                     yield event.plain_result(f"请求失败：状态码{response.status}")
                     return
@@ -40,7 +44,7 @@ class DwoVideoPlugin(Star):
                 video_component = Video.fromURL(video_url)
                 message_chain = [
                     video_component,
-                    Plain("视频获取成功！ "+ video_url) 
+                    Plain("视频获取成功！") 
                 ]
                 yield event.chain_result(message_chain)
         except aiohttp.ClientError as e:
