@@ -48,15 +48,17 @@ class DwoVideoPlugin(Star):
                     context = await response.read()  # 讀取原始 bytes
 
 
+                logger.info(f"API 响应内容类型：{content_type}")
                 logger.info(f"視頻信息：{context}")
                 
-                video_url = str(context)
+                video_url = str(context.data)
 
                 video_component = Video.fromURL(video_url)
                 logger.info(f"視頻組件：{video_component}")
 
                 message_chain = [
-                    Plain("视频获取成功！") 
+                    Plain("视频获取成功！\n") ,
+                    video_component
                 ]
 
                 if self.config.get("debug_mode", False):
