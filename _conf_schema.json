@@ -1,0 +1,14 @@
+{
+  "api_key": {
+    "description": "API Token",
+    "type": "string",
+    "hint": "小小API Key",
+    "obvious_hint": true
+  },
+   "debug_mode": {
+    "description": "Debug Mode",
+    "type": "bool",
+    "hint": "是否开启调试模式"
+  }
+  
+}
